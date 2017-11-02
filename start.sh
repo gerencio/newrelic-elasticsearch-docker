@@ -1,10 +1,11 @@
 #!/bin/bash
 
 set -e
-
 if [ "$1" = 'newrelic-elasticsearch' ]; then
 	name=${ES_NAME:-elasticsearch-docker}
-	host=${ES_HOST:-localhost}
+	# if not set ES_HOST, the service will search in /conf/ip for the ip used
+	host=${ES_HOST:-`cat /conf/ip`}
+	echo $host
 	port=${ES_PORT:-9200}
 	username=${ES_USER}
 	password=${ES_PASSWD}
